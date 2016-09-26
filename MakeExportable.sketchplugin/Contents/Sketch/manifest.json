@@ -1,0 +1,68 @@
+{
+  "author" : "Aby Nimbalkar",
+  "commands" : [
+    {
+      "script" : "script.js",
+      "handler" : "saveAsPreset",
+      "name" : "New Preset",
+      "identifier" : "saveAsPreset"
+    },
+    {
+      "script" : "script.js",
+      "handler" : "restorePresets",
+      "name" : "Restore Presets",
+      "identifier" : "restorePresets"
+    },
+    {
+      "script" : "script.js",
+      "handler" : "importPresets",
+      "name" : "Import Presets",
+      "identifier" : "importPresets"
+    },
+    {
+      "script" : "script.js",
+      "handler" : "exportPresets",
+      "name" : "Export Presets",
+      "identifier" : "exportPresets"
+    },
+    {
+      "script" : "script.js",
+      "handler" : "deletePresets",
+      "name" : "Delete Presets",
+      "identifier" : "deletePresets"
+    },
+    {
+      "script" : "script.js",
+      "handler" : "clearFormats",
+      "name" : "Remove Formats for Selection",
+      "identifier" : "removeAllFormats"
+    }
+  ],
+  "bundleVersion" : 1,
+  "menu" : {
+    "items" : [
+      "-",
+      "removeAllFormats",
+      "-",
+      {
+        "title" : "Configure",
+        "items" : [
+          "saveAsPreset",
+          "-",
+          "importPresets",
+          "exportPresets",
+          "-",
+          "restorePresets",
+          "deletePresets"
+        ]
+      }
+    ]
+  },
+  "compatibleVersion" : 40,
+  "identifier" : "com.abynim.sketchplugins.exportable",
+  "version" : "1.0",
+  "description" : "Export options for Sketch layers.",
+  "homepage" : "https:\/\/github.com\/abynim\/exportable",
+  "authorEmail" : "abynimbalkar@gmail.com",
+  "name" : "Make Exportable"
+}
