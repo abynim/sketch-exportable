@@ -12,19 +12,25 @@ When you first install the plugin it will contain no presets. You must set it up
 
 ###Create a New Preset
 Select a layer and manually make it exportable in the Inspector. Add all the formats, sizes and suffixes you need.  
-![New Preset Formats](http://abynim.com/plugins/sketch-exportable/new-preset-formats.png?raw=true)
+
+<img src="http://abynim.com/plugins/sketch-exportable/new-preset-formats.png?raw=true" alt="New Preset Formats" width="212px" height="167px"/>
 
 With the same layer selected, run the `Make Exportable` > `Configure` > `New Preset` plugin command.  
-![New Preset Menu](http://abynim.com/plugins/sketch-exportable/new-preset.png?raw=true)
+
+<img src="http://abynim.com/plugins/sketch-exportable/new-preset.png?raw=true" alt="New Preset Menu" width="708px" height=" 221px"/>
 
 Give the preset a name. Optionally also set a shortcut. Shortcuts are defined by using a combination of modifiers ( `cmd`, `control`, `shift`, `option`) and any other key. For example, `cmd shift y`. Remember to check if a shortcut is already being used by a different plugin or by Sketch itself.
-![New Preset Options](http://abynim.com/plugins/sketch-exportable/new-preset-options.png?raw=true)
+
+<img src="http://abynim.com/plugins/sketch-exportable/new-preset-options.png?raw=true" alt="New Preset Options" width="535px" height="383px"/>
 
 When you save the preset, you will see it as a menu item in the plugins menu. Next time you need to add these export settings to a layer, just select it and trigger the command.
-![New Preset Defined](http://abynim.com/plugins/sketch-exportable/new-preset-defined.png?raw=true)
+
+<img src="http://abynim.com/plugins/sketch-exportable/new-preset-defined.png?raw=true" alt="New Preset Defined" width="574px" height="151px"/>
+
 
 ###Other Configuration Options
-![Other Config Options](http://abynim.com/plugins/sketch-exportable/config-options.png?raw=true)
+
+<img src="http://abynim.com/plugins/sketch-exportable/config-options.png?raw=true" alt="Other Config Options" width="176px" height="161px"/>
 
 1. **Import and Export** - To transfer your presets to another Mac or to share them with your team, you can `Export` them to a file. Then `Import` the file on the destination Mac. Easy-peasy.
 2. **Restore Presets** - When you update the plugin with future versions, your presets will be removed from the plugin menu. Not to worry, they are saved independently. Run a `Restore` to see them in the plugins menu again.

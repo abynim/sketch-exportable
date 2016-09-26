@@ -50,6 +50,7 @@ var saveAsPreset = function(context) {
 			presetShortcut = shortcutField.stringValue(),
 			presetID = NSUUID.UUID().UUIDString(),
 			presetExists = false,
+			absoluteSize = layer.absoluteInfluenceRect().size,
 			existingPresetIndex, existingPresetID,
 			command;
 
@@ -87,7 +88,7 @@ var saveAsPreset = function(context) {
 			optionsCount = exportOptions.count(),
 			config = { presets : {} }, 
 			newPreset = { presetName : presetName, shortcut : presetShortcut, exportFormats : [] },
-			formatObj, formatOption;
+			formatObj, formatOption, visualScaleType, actualSize, actualScale;
 
 		if (savedConfig) {
 			for (var pID in savedConfig.presets) {
@@ -101,11 +102,15 @@ var saveAsPreset = function(context) {
 
 		for (var i = 0; i < optionsCount; i++) {
 			formatOption = exportOptions.objectAtIndex(i);
+			visualScaleType = formatOption.visibleScaleType();
+			actualScale = formatOption.scale();
+			actualSize = visualScaleType == 1 ? Math.round(absoluteSize.width*actualScale) : visualScaleType == 2 ? Math.round(absoluteSize.height*actualScale) : 1;
 			formatObj = {
-				scale : formatOption.scale(),
+				scale : actualScale,
+				size : actualSize,
 				name : formatOption.name(),
 				fileFormat : formatOption.fileFormat(),
-				visibleScaleType : formatOption.visibleScaleType()
+				visibleScaleType : visualScaleType
 			}
 			newPreset.exportFormats.push(formatObj);
 		}
@@ -242,22 +247,28 @@ var applyPreset = function(context) {
 		presetID = context.command.identifier(),
 		selectedPreset = presets[presetID].exportFormats,
 		presetOptionsCount = selectedPreset.count(),
-		formatOptions = [],
-		formatOption, presetOption, formatOptionsCount, exportOptions, layer;
+		formatOptions,
+		formatOption, presetOption, exportOptions, layer, absoluteSize, actualScale;
 
-	for (var i = 0; i < presetOptionsCount; i++) {
-		presetOption = selectedPreset[i];
-		formatOption = MSExportFormat.formatWithScale_name_fileFormat(presetOption.scale, presetOption.name, presetOption.fileFormat);
-		formatOption.setVisibleScaleType(presetOption.visibleScaleType);
-		formatOptions.push(formatOption);
-	}
-	formatOptionsCount = formatOptions.length;
 
 	context.document.currentPage().deselectAllLayers();
 
 	while (layer = loop.nextObject()) {
 		exportOptions = layer.exportOptions();
 		exportOptions.removeAllExportFormats();
+
+		absoluteSize = layer.absoluteInfluenceRect().size;
+		formatOptions = [];
+		for (var i = 0; i < presetOptionsCount; i++) {
+			presetOption = selectedPreset[i];
+
+			actualScale = presetOption.visibleScaleType == 1 ? presetOption.size/absoluteSize.width : presetOption.visibleScaleType == 2 ? presetOption.size/absoluteSize.height : presetOption.scale;
+			formatOption = MSExportFormat.formatWithScale_name_fileFormat(actualScale, presetOption.name, presetOption.fileFormat);
+
+			formatOption.setVisibleScaleType(presetOption.visibleScaleType);
+			formatOptions.push(formatOption);
+		}
+
 		exportOptions.addExportFormats(formatOptions);
 		layer.select_byExpandingSelection(true, true);
 	}
